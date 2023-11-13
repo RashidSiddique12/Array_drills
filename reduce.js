@@ -7,8 +7,19 @@
 const items = [1, 2, 3, 4, 5, 5];
 
 function reduce(elements, cb, startingValue) {
-  let store = startingValue;
-  for (let i = 0; i < elements.length; i++) {
+  let startingIndex;
+  let store;
+
+  if(startingValue !== undefined){
+    store = startingValue;
+    startingIndex = 0;
+  }
+  else{
+    store = elements[0];
+    startingIndex = 1;
+  }
+
+  for (let i = startingIndex; i < elements.length; i++) {
     store = cb(store, elements[i]);
   }
   return store;
@@ -16,6 +27,6 @@ function reduce(elements, cb, startingValue) {
 
 const sumOfItems = reduce(items,(acc, curr) => {
     return acc + curr;
-  },0);
+  },10);
 
 console.log(sumOfItems);
